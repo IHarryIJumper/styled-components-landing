@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "pwa export --routes /about,/blog,/",
+    "start": "sirv build -s",
+    "watch": "pwa watch"
+  },
+  "dependencies": {
+    "ganalytics": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-loadable": "latest",
+    "react-router-dom": "latest",
+    "sirv-cli": "latest",
+    "styled-components": "^4.0.0-beta.10"
+  },
+  "devDependencies": {
+    "@pwa/cli": "latest",
+    "@pwa/plugin-gzip": "latest",
+    "@pwa/plugin-sw-precache": "latest",
+    "@pwa/preset-react": "latest"
+  }
+}

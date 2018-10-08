@@ -1,0 +1,16 @@
+{
+  "name": "styled-components landing",
+  "short_name": "Landing",
+  "background_color": "#3E82F7",
+  "orientation": "portrait",
+  "theme_color": "#73BDDD",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/assets/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
