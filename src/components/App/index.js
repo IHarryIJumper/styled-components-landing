@@ -86,10 +86,6 @@ const MainSection = styled.main`
   z-index: 1;
   margin-bottom: ${FOOTER_EXTENDED_SIZE - FOOTER_NORMAL_SIZE}px;
   transition: margin 0.3s ease-out;
-
-  ${media.notDesktop`
-    width: 90%
-  `};
 `;
 
 const LoadingContainer = styled(({ ...props }) => (

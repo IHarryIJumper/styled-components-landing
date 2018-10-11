@@ -1,8 +1,9 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { HMR } from "@pwa/preset-react";
 
 import { Section } from "@components/Styles";
+import testTaggedTemplateLiterals from "@components/TaggedTemplateLiterals";
 
 import Code from "@components/Code";
 
@@ -65,45 +66,101 @@ const TestElementsContainer = styled.div`
   background-color: ${props => props.theme.darkTextColor};
   color: #ccc;
   display: flex;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 `;
 
-const Home = () => {
-  return (
-    <div>
-      <Section>
-        <ImageSectionContainer>
-          <ImageSection image={Pic1}>
-            <div>
-              <Title>
-                <h1>STYLED-COMPONENTS</h1>
-                <h3>Use them with style</h3>
-              </Title>
-            </div>
-          </ImageSection>
+const TaggedTemplateLiteralTestButton = styled.button`
+  padding: 10px 20px;
+  border-radius: ${props => props.theme.radius};
+  border: 1px solid ${props => props.theme.primaryColor};
+  background-color: transparent;
+  color: ${props => props.theme.primaryColor};
+  font-size: 16px;
+  margin-top: 10px;
+  transition: color ${props => props.theme.transition.medium}ms,
+    border-color ${props => props.theme.transition.medium}ms;
+  cursor: pointer;
+  outline: none;
 
-          <ImageSection image={Pic2} />
-        </ImageSectionContainer>
-      </Section>
-      <Section>
-        <div>
-          <h2>Установка</h2>
-          <Code text="npm install styled-components@beta --save" />
-          <Code offset label="или" text="yarn add styled-components@beta" />
-        </div>
-      </Section>
+  :hover {
+    color: ${props => props.theme.lightTextColor};
+    border-color: ${props => props.theme.lightTextColor};
+  }
+`;
 
-      <Section>
-        <div>
-          <h2>Здесь могут быть ваши элементы</h2>
-          <TestElementsContainer>
-            <span>Здесь очень пусто и одиноко... 😔</span>
-          </TestElementsContainer>
-        </div>
-      </Section>
-    </div>
-  );
-};
+const TaggedTemplateLiteralQuote = styled.p`
+  margin-top: 20px;
+`;
+
+class Home extends PureComponent {
+  state = {
+    taggedQuote: null
+  };
+  render() {
+    const { taggedQuote } = this.state;
+    return (
+      <div>
+        <Section>
+          <ImageSectionContainer>
+            <ImageSection image={Pic1}>
+              <div>
+                <Title>
+                  <h1>STYLED-COMPONENTS</h1>
+                  <h3>Use them with style</h3>
+                </Title>
+              </div>
+            </ImageSection>
+
+            <ImageSection image={Pic2} />
+          </ImageSectionContainer>
+        </Section>
+        <Section>
+          <div>
+            <h2>Установка</h2>
+            <Code text="npm install styled-components@beta --save" />
+            <Code offset label="или" text="yarn add styled-components@beta" />
+          </div>
+        </Section>
+
+        <Section>
+          <div>
+            <h2>Tagged Template Literals</h2>
+            <TestElementsContainer>
+              <span>
+                {"`Test string with variable A: ${a}, variable B: ${b}`"}
+              </span>
+              <TaggedTemplateLiteralTestButton
+                onClick={() => {
+                  this.setState({
+                    taggedQuote: testTaggedTemplateLiterals()
+                  });
+                }}
+              >
+                Test
+              </TaggedTemplateLiteralTestButton>
+              {taggedQuote && (
+                <TaggedTemplateLiteralQuote
+                  dangerouslySetInnerHTML={{ __html: taggedQuote }}
+                />
+              )}
+            </TestElementsContainer>
+          </div>
+        </Section>
+
+        <Section>
+          <div>
+            <h2>Здесь могут быть ваши компоненты</h2>
+            <TestElementsContainer>
+              <span>Здесь очень пусто и одиноко... 😔</span>
+            </TestElementsContainer>
+          </div>
+        </Section>
+      </div>
+    );
+  }
+}
 
 export default HMR(Home, module);
