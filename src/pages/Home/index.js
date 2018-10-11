@@ -1,16 +1,30 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { HMR } from "@pwa/preset-react";
 
 import { Section } from "@components/Styles";
 import testTaggedTemplateLiterals from "@components/TaggedTemplateLiterals";
+import StyleEverything from "@components/Examples/StyleEverything";
 
 import Code from "@components/Code";
 
 import Pic1 from "@assets/pic-1.jpg";
 import Pic2 from "@assets/pic-2.jpg";
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+`;
+
 const Title = styled.div`
+  opacity: 0;
   padding: 20px;
   z-index: 2;
   position: relative;
@@ -21,14 +35,15 @@ const Title = styled.div`
   text-align: center;
   color: ${props => props.theme.darkTextColor};
   background-color: ${props => props.theme.lightTextColor};
+  animation: ${fadeIn} ${props => props.theme.transition.medium}ms ease-in forwards;
 
-  & h1 {
+  h1 {
     font-size: 2.875em;
     font-weight: 800;
     line-height: 1;
   }
 
-  & h3 {
+  h3 {
     line-height: 2;
     font-weight: 200;
     letter-spacing: 2px;
@@ -97,7 +112,7 @@ const TaggedTemplateLiteralQuote = styled.p`
 
 class Home extends PureComponent {
   state = {
-    taggedQuote: null
+    taggedQuote: testTaggedTemplateLiterals()
   };
   render() {
     const { taggedQuote } = this.state;
@@ -135,7 +150,7 @@ class Home extends PureComponent {
               <TaggedTemplateLiteralTestButton
                 onClick={() => {
                   this.setState({
-                    taggedQuote: testTaggedTemplateLiterals()
+                    taggedQuote: testTaggedTemplateLiterals(true)
                   });
                 }}
               >
@@ -146,6 +161,15 @@ class Home extends PureComponent {
                   dangerouslySetInnerHTML={{ __html: taggedQuote }}
                 />
               )}
+            </TestElementsContainer>
+          </div>
+        </Section>
+
+        <Section>
+          <div>
+            <h2>Style Everything</h2>
+            <TestElementsContainer>
+              <StyleEverything />
             </TestElementsContainer>
           </div>
         </Section>

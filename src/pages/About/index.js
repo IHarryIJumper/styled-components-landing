@@ -1,8 +1,17 @@
 import React from "react";
 import { HMR } from "@pwa/preset-react";
+import styled from "styled-components";
+
 import CardSection from "@components/CardSection";
+import media from "@components/MediaQueries";
 
 import { Section } from "@components/Styles";
+
+const MediaQuerySection = styled(Section)`
+  ${media.mobile`
+    font-size: 10px
+  `};
+`;
 
 const About = () => {
   return (
